@@ -37,6 +37,10 @@ Add these files:
 - `.agents/skills/robust-repo-change/SKILL.md`
 - `.agents/skills/session-worklog/SKILL.md`
 
+For Clinical Data Studio, NIMS Fast Summary, or any software that handles medical/research data, also add:
+
+- `.agents/skills/clinical-software-safety/SKILL.md`
+
 Connect the relevant GitHub repository. Keep repository-specific architecture and validation in that repository's `AGENTS.md` and tests.
 
 ### 4. Documents and Administration

@@ -16,6 +16,12 @@
       "source": "original adaptation"
     },
     {
+      "name": "clinical-software-safety",
+      "category": "clinical-software",
+      "status": "active",
+      "source": "original adaptation"
+    },
+    {
       "name": "research-protocol-publication",
       "category": "research",
       "status": "active",
