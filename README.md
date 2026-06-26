@@ -1,6 +1,6 @@
 # Dr Bhanu Prasad — Personal AI Skills System
 
-This repository is the canonical source for reusable workflows used across ChatGPT Projects, Codex, GitHub repositories, clinical research, medical evidence review, document production, and software engineering.
+This repository is the canonical source for reusable workflows used across ChatGPT Projects, Codex, GitHub repositories, clinical research, medical evidence review, clinical software, document production, and software engineering.
 
 ## Design
 
@@ -18,6 +18,7 @@ This separation prevents one oversized prompt from mixing medical, research, doc
 |---|---|
 | `evidence-first-medical-review` | Current, citation-backed infectious-disease and medical literature synthesis |
 | `clinical-case-consultation` | Structured clinical reasoning, differential diagnosis, investigations, treatment, monitoring, and uncertainty |
+| `clinical-software-safety` | Privacy, provenance, deterministic parsing, external-AI gating, auditability, and clinical release validation |
 | `research-protocol-publication` | Protocols, IEC/IRB responses, manuscripts, case reports, grants, and reporting-guideline compliance |
 | `robust-repo-change` | Root-cause diagnosis, narrow implementation, regression testing, PR review, CI validation, and merge discipline |
 | `artifact-production-qa` | Professional DOCX, PDF, spreadsheet, and slide production with rendering and quality checks |
@@ -25,7 +26,7 @@ This separation prevents one oversized prompt from mixing medical, research, doc
 
 ## ChatGPT setup
 
-Create a dedicated ChatGPT Project and add `chatgpt/BHANU_AI_OPERATING_SYSTEM.md` as a project file. Put recurring medical, research, coding, and document chats in that Project so project memory can use the shared file and prior project conversations.
+Create dedicated ChatGPT Projects and add `chatgpt/BHANU_AI_OPERATING_SYSTEM.md` as a project file. Put recurring medical, research, coding, clinical-software, and document chats in the appropriate Project so project memory can use shared files and prior project conversations.
 
 The operating file is intentionally compact. Detailed workflows remain in the skill folders and can be opened through the GitHub connector when needed.
 
@@ -36,6 +37,13 @@ Codex-compatible tools discover skills under `.agents/skills/`. To copy selected
 ```bash
 python scripts/sync_skills.py /path/to/target-repo \
   robust-repo-change session-worklog
+```
+
+For software that handles clinical or research data, include:
+
+```bash
+python scripts/sync_skills.py /path/to/target-repo \
+  robust-repo-change clinical-software-safety session-worklog
 ```
 
 Validate the catalog with:
@@ -50,5 +58,6 @@ Repository-specific rules remain authoritative. A copied skill supplements, but 
 
 - Never store patient identifiers, credentials, tokens, private keys, or confidential institutional data in this public repository.
 - Medical outputs require current source verification and explicit uncertainty.
+- Clinical-software outputs require privacy, provenance, source-verification, and human-review safeguards.
 - Code completion claims require fresh tests or CI evidence.
 - Live trading or production changes require repository-specific risk controls and manual review.
