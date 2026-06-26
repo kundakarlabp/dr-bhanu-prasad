@@ -1,0 +1,39 @@
+name: Validate Agent Skills
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate skill catalog
+        run: python scripts/validate_skills.py
+      - name: Compile helper scripts
+        run: python -m compileall -q scripts
+      - name: Smoke-test cross-repository sync
+        run: |
+          target="$(mktemp -d)"
+          python scripts/sync_skills.py "$target" robust-repo-change session-worklog
+          test -f "$target/.agents/skills/robust-repo-change/SKILL.md"
+          test -f "$target/.agents/skills/session-worklog/SKILL.md"
+      - name: Verify dry-run and overwrite protection
+        run: |
+          target="$(mktemp -d)"
+          python scripts/sync_skills.py "$target" evidence-first-medical-review --dry-run
+          python scripts/sync_skills.py "$target" evidence-first-medical-review
+          if python scripts/sync_skills.py "$target" evidence-first-medical-review; then
+            echo "Expected overwrite protection to fail"
+            exit 1
+          fi
+          python scripts/sync_skills.py "$target" evidence-first-medical-review --force
