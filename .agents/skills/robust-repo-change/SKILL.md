@@ -73,6 +73,10 @@ For a regression test, verify that it would fail without the fix when practical.
 - Merge only when the final head is mergeable and all required checks pass.
 - Report the PR and merge commit accurately.
 
+## Validation
+
+Completion requires fresh command output or CI evidence for the final branch head. A previous run, partial suite, plausible diff, or agent statement is not sufficient evidence.
+
 ## Trading and production safeguards
 
 - Never weaken readiness, risk, capital, position, cooldown, max-loss, execution-mode, or secret-management controls to make tests pass.
